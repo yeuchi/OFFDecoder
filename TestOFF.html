@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
-	Module:			DecodeOFF.html
+	    Module:		DecodeOFF.html
     
-    Description:	decode OFF 3D file
+	    Description:	decode OFF 3D file
     				extending work of Devon Govett from bmp.js
     
-	Reference:
-    	BMP.js		http://devongovett.github.com/bmp.js/
-        Specification:	http://www.holmes3d.net/graphics/offfiles/
-        Samples:	http://people.sc.fsu.edu/~jburkardt/data/off/off.html
+	    Reference:
+	    BMP.js		http://devongovett.github.com/bmp.js/
+	    Specification:	http://www.holmes3d.net/graphics/offfiles/
+	    Samples:		http://people.sc.fsu.edu/~jburkardt/data/off/off.html
   
-    Author(s):		Devon Govett provide a bmp decoding example.
+	    Author(s):		Devon Govett provide a bmp decoding example.
     				C.T. Yeung modify to decode PLY.
     
-    History:	
-    17Mar12		functional	cty
+	    History:	
+	    17Mar12		functional	cty
 -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,6 +37,7 @@
 			var rZ = 0;
 			var STEP = 10;
 			var instance;
+			var numTriangles;
 			var renderer = new Renderer(canvas.width, canvas.height, myContext);
 			
 			loadOFF();
@@ -91,10 +92,10 @@
 				var mag = $("#slider").val();
 				myContext.clearRect(0,0,canvas.width, canvas.height);
 				
-				var numTriangles = 0;
-				var numTriangles = instance.decode();
+				if(numTriangles==null)
+				    numTriangles = instance.decode();
+				
 				renderer.drawWireFrame(instance, mag, rX, rY, rZ);
-				//instance.drawWireFrame(context, canvas.width, canvas.height, mag,rX, rY, rZ);
 				$("#faceCount").html("Face count: " + numTriangles);
 			}
 			
@@ -109,7 +110,7 @@
 					else
 						update();
 				
-			}, 100);
+			}, 150);
 
 		});
     </script>
